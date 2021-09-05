@@ -5,9 +5,14 @@ import com.alfa.giphy_giver.feign.FeignOpenExchangeClient;
 import com.alfa.giphy_giver.model.ExchangeRates;
 import com.alfa.giphy_giver.service.ExchangeRatesService;
 import com.alfa.giphy_giver.service.ExchangeRatesServiceImpl;
+import com.alfa.giphy_giver.service.GiphyServiceImpl;
 import feign.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -16,40 +21,54 @@ import java.util.Map;
 import java.util.Set;
 
 @RestController
-public class MainController implements FeignOpenExchange {
-//    private FeignOpenExchangeClient client;
+@RequestMapping("/api")
+public class MainController{
     private ExchangeRatesServiceImpl exchangeRatesService;
+    private GiphyServiceImpl giphyService;
+    @Value("${giphy.richtag}")
+    private String richTag;
+    @Value("${giphy.broketag}")
+    private String brokeTag;
 
-//    public MainController(FeignOpenExchangeClient client) {
-//        this.client = client;
-//    }
-
-    public MainController(ExchangeRatesServiceImpl exchangeRatesService) {
-                this.exchangeRatesService = exchangeRatesService;
+    @Autowired
+    public MainController(ExchangeRatesServiceImpl exchangeRatesService, GiphyServiceImpl giphyService) {
+        this.exchangeRatesService = exchangeRatesService;
+        this.giphyService = giphyService;
     }
 
-//    @Override
-//    @GetMapping("/get-codes")
-//    public ResponseEntity<Map> getCodes() {
-//        return exchangeRatesService.getCodes();
-//    }
 
-    @Override
+
     @GetMapping("/get-currates")
     public ExchangeRates getCurRates(String appId, String base) {
         exchangeRatesService.refreshRates();
         return exchangeRatesService.getCurDayRates();
     }
 
-    @Override
-    @GetMapping("/get-prevrates")
-    public ExchangeRates getPrevRates(String prevDate, String appId, String base) {
-        exchangeRatesService.refreshRates();
-        return exchangeRatesService.getPrevDayRates();
+
+//    @GetMapping("/get-prevrates")
+//    public ExchangeRates getPrevRates(String prevDate, String appId, String base) {
+//        exchangeRatesService.refreshRates();
+//        return exchangeRatesService.getPrevDayRates();
+//    }
+
+    @GetMapping("/codes")
+    public List<String> getCodes(){
+        return exchangeRatesService.getCurrencyCodes();
     }
 
-    @GetMapping("/rates")
-    public List<String> getRates(){
-        return exchangeRatesService.getCurrencyCodes();
+    @GetMapping("/getgif")
+    public ResponseEntity<Map> getGif(@RequestParam("code") String code){
+        int compareResult = exchangeRatesService.compareCurrencies(code);
+        String tag;
+        switch (compareResult){
+            case 1:
+                tag = this.richTag;
+            case -1:
+                tag = this.brokeTag;
+            default:
+                tag = "";
+        }
+
+        return giphyService.getGif(tag);
     }
 }

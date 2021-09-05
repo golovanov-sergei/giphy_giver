@@ -8,8 +8,4 @@ import java.util.Map;
 
 public interface ExchangeRatesService {
     ExchangeRates refreshRates();
-
-//    ExchangeRates getCurRates();
-//    ExchangeRates getPrevRates();
-
 }

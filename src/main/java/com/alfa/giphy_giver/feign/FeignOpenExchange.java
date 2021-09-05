@@ -10,9 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface FeignOpenExchange {
-//    @GetMapping("/currencies.json")
-//    ResponseEntity<Map> getCodes();
-
     @GetMapping("/latest.json")
     ExchangeRates getCurRates(
             String appId,

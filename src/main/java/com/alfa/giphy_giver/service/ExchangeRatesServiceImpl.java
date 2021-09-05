@@ -43,7 +43,7 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
 
     }
 
-    public ExchangeRates refreshCurrentRates() {
+    private ExchangeRates refreshCurrentRates() {
         return this.curDayRates = feignOpenExchangeClient.getCurRates(appId, base);
 
     }
@@ -63,9 +63,17 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
         Calendar cal = Calendar.getInstance();
         SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
         cal.setTimeInMillis(curTime);
-        cal.add(Calendar.DATE,-1);
+        cal.add(Calendar.DATE, -1);
         String prevDate = sFormat.format(cal.getTime());
 
         return this.prevDayRates = feignOpenExchangeClient.getPrevRates(prevDate, appId, base);
+    }
+
+    public int compareCurrencies(String code) {
+        Double curValue;
+        Double prevValue;
+        curValue = this.curDayRates.getRates().get(code);
+        prevValue = this.prevDayRates.getRates().get(code);
+        return Double.compare(curValue,prevValue);
     }
 }
