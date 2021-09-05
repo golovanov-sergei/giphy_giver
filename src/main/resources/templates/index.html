@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p th:text="${greeting}"></p>
+<form action="#" th:action="@{/showgif}">
+<select>
+    <option th:each="list: ${list}" th:text="${list}"/>
+</select>
+    <input type="submit" th:value="Get gif">
+</form>
+</body>
+</html>

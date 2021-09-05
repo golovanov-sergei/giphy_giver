@@ -1,12 +1,8 @@
 package com.alfa.giphy_giver.controller;
 
-import com.alfa.giphy_giver.feign.FeignOpenExchange;
-import com.alfa.giphy_giver.feign.FeignOpenExchangeClient;
 import com.alfa.giphy_giver.model.ExchangeRates;
-import com.alfa.giphy_giver.service.ExchangeRatesService;
 import com.alfa.giphy_giver.service.ExchangeRatesServiceImpl;
 import com.alfa.giphy_giver.service.GiphyServiceImpl;
-import feign.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -44,12 +38,6 @@ public class MainController{
         return exchangeRatesService.getCurDayRates();
     }
 
-
-//    @GetMapping("/get-prevrates")
-//    public ExchangeRates getPrevRates(String prevDate, String appId, String base) {
-//        exchangeRatesService.refreshRates();
-//        return exchangeRatesService.getPrevDayRates();
-//    }
 
     @GetMapping("/codes")
     public List<String> getCodes(){

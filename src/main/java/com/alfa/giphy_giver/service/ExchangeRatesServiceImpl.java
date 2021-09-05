@@ -12,8 +12,8 @@ import java.util.*;
 
 @Service
 public class ExchangeRatesServiceImpl implements ExchangeRatesService {
-    public ExchangeRates prevDayRates;
-    public ExchangeRates curDayRates;
+    private ExchangeRates prevDayRates;
+    private ExchangeRates curDayRates;
     private FeignOpenExchangeClient feignOpenExchangeClient;
     @Value("${openexchangerates.appid}")
     private String appId;
