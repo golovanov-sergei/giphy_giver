@@ -19,7 +19,7 @@ Must Have
 Nice to Have
 Сборка и запуск Docker контейнера с этим сервисом
 
-Запуск
+Запуск на Java 11
 java -jar giphy_giver-0.0.1.jar
 пример работы доступен по адресу
 http://localhost:8080
