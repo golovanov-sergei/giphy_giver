@@ -17,3 +17,4 @@ Must Have
 
 Nice to Have
 Сборка и запуск Docker контейнера с этим сервисом
+

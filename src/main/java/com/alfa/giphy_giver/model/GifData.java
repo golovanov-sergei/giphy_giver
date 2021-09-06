@@ -2,6 +2,9 @@ package com.alfa.giphy_giver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//Класс для преобразования jsona в объект для дальнейшей передачи его во фронт.
+//Для работы сервиса он не нужен
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GifData {
 //            "type":"gif"

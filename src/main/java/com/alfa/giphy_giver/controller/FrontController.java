@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.ArrayList;
 import java.util.List;
 
+//контроллер для простого html с демонстрацией работы сервиса
+
 @Controller
 public class FrontController {
     private ExchangeRatesService exchangeRatesService;
@@ -38,12 +40,23 @@ public class FrontController {
     }
     @GetMapping("/showgif")
     public String showGif(@RequestParam("code") String code, Model model){
+        //Вывод данных для отладки
+        //Курс предыдущего дня
         model.addAttribute("prevDayRates",exchangeRatesService.getPrevDayRates().getRates().get(code));
+        //Курс текущего дня
         model.addAttribute("curDayRates",exchangeRatesService.getCurDayRates().getRates().get(code));
+        //Базовая валюта USD, т.к. RUB недоступен на бесплатном аккаунте
         model.addAttribute("base",this.base);
+        //Валюта для сравнения
         model.addAttribute("code",code);
+        //Результат сравнения
+        // 1 - курс вырос
+        //-1 - курс уменьшился
+        // 0 - курс неизменился, в задаче никак условие не было оговорено, поэтому выводим рандомную гифку без тэгов
         model.addAttribute("compareResult",exchangeRatesService.compareCurrencies(code));
+        //список валют для сравнения
         model.addAttribute("list",exchangeRatesService.getCurrencyCodes());
+        //url гифки
         model.addAttribute("img", giphyService.getGif(code).getStdUrl());
         return "showgif";
     }

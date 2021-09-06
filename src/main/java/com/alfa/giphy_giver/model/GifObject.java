@@ -7,6 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
+//Класс для преобразования jsona в объект для дальнейшей передачи его во фронт.
+//Для работы сервиса он не нужен
+
 //@JsonIgnoreProperties(ignoreUnknown = true)
 //@JsonAutoDetect
 public class GifObject {

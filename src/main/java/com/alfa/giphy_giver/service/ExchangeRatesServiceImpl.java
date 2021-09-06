@@ -4,7 +4,6 @@ import com.alfa.giphy_giver.feign.FeignOpenExchangeClient;
 import com.alfa.giphy_giver.model.ExchangeRates;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
