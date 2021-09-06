@@ -8,4 +8,9 @@ import java.util.Map;
 
 public interface ExchangeRatesService {
     ExchangeRates refreshRates();
+    List<String> getCurrencyCodes();
+    ExchangeRates getPrevDayRates();
+    ExchangeRates getCurDayRates();
+    int compareCurrencies(String code);
+
 }

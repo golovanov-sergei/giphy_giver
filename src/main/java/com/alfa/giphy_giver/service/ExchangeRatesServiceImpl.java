@@ -20,13 +20,16 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
     @Value("${openexchangerates.base}")
     private String base;
 
+    @Override
     public ExchangeRates getPrevDayRates() {
         return prevDayRates;
     }
 
+    @Override
     public ExchangeRates getCurDayRates() {
         return curDayRates;
     }
+
 
 
     @Autowired
@@ -51,6 +54,7 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
     //    public Set<String> getCurrencyCodes() {
 //        return this.curDayRates.getRates().keySet();
 //    }
+    @Override
     public List<String> getCurrencyCodes() {
         List<String> res = null;
         if (this.refreshCurrentRates() != null) {
@@ -69,11 +73,12 @@ public class ExchangeRatesServiceImpl implements ExchangeRatesService {
         return this.prevDayRates = feignOpenExchangeClient.getPrevRates(prevDate, appId, base);
     }
 
+    @Override
     public int compareCurrencies(String code) {
         Double curValue;
         Double prevValue;
         curValue = this.curDayRates.getRates().get(code);
         prevValue = this.prevDayRates.getRates().get(code);
-        return Double.compare(curValue,prevValue);
+        return Double.compare(curValue, prevValue);
     }
 }

@@ -1,6 +1,7 @@
 package com.alfa.giphy_giver.controller;
 
 import com.alfa.giphy_giver.model.ExchangeRates;
+import com.alfa.giphy_giver.model.GifObject;
 import com.alfa.giphy_giver.service.ExchangeRatesServiceImpl;
 import com.alfa.giphy_giver.service.GiphyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,18 +46,21 @@ public class MainController{
     }
 
     @GetMapping("/getgif")
-    public ResponseEntity<Map> getGif(@RequestParam("code") String code){
+    public GifObject getGif(@RequestParam("code") String code){
         int compareResult = exchangeRatesService.compareCurrencies(code);
         String tag;
         switch (compareResult){
             case 1:
                 tag = this.richTag;
+                break;
             case -1:
                 tag = this.brokeTag;
+                break;
             default:
                 tag = "";
+                break;
         }
-
-        return giphyService.getGif(tag);
+        GifObject gifObject = giphyService.getGif(tag);
+        return gifObject;
     }
 }

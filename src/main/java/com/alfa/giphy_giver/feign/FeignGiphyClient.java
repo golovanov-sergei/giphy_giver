@@ -1,5 +1,6 @@
 package com.alfa.giphy_giver.feign;
 
+import com.alfa.giphy_giver.model.GifObject;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +12,7 @@ import java.util.Map;
 public interface FeignGiphyClient extends FeignGiphy{
     @Override
     @GetMapping("/random")
-    ResponseEntity<Map> getRandomGif(
+    GifObject getRandomGif(
             @RequestParam("api_key") String api_key,
             @RequestParam("tag") String tag);
 }

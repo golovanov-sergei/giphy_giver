@@ -1,12 +1,11 @@
 package com.alfa.giphy_giver.service;
 
 import com.alfa.giphy_giver.feign.FeignGiphyClient;
+import com.alfa.giphy_giver.model.GifObject;
+import com.fasterxml.jackson.databind.JsonNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Service
 public class GiphyServiceImpl implements GiphyService{
@@ -20,7 +19,7 @@ public class GiphyServiceImpl implements GiphyService{
     }
 
     @Override
-    public ResponseEntity<Map> getGif(String tag) {
+    public GifObject getGif(String tag) {
         return feignGiphyClient.getRandomGif(this.apikey, tag);
     }
 }
