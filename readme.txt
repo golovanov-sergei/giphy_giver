@@ -1,3 +1,4 @@
+Задача
 Создать сервис, который обращается к сервису курсов валют, и отдает gif в ответ:
 если курс по отношению к рублю за сегодня стал выше вчерашнего, то отдаем рандомную отсюда https://giphy.com/search/rich
 если ниже - отсюда https://giphy.com/search/broke
@@ -18,3 +19,12 @@ Must Have
 Nice to Have
 Сборка и запуск Docker контейнера с этим сервисом
 
+Запуск
+java -jar giphy_giver-0.0.1.jar
+пример работы доступен по адресу
+http://localhost:8080
+http://krymsuvenir.ru:8080
+
+Endpoints
+/api/codes - список валют
+/api/getgif?code= - получить гиф для валюты из параметра code

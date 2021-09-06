@@ -32,7 +32,7 @@ public class MainController{
     }
 
 
-
+    //Не нужен???
     @GetMapping("/get-currates")
     public ExchangeRates getCurRates(String appId, String base) {
         exchangeRatesService.refreshRates();
