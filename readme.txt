@@ -23,7 +23,7 @@ Nice to Have
 java -jar giphy_giver-0.0.1.jar
 пример работы доступен по адресу
 http://localhost:8080
-http://krymsuvenir.ru:8080
+
 
 Endpoints
 /api/codes - список валют
