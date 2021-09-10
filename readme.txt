@@ -28,3 +28,7 @@ http://localhost:8080
 Endpoints
 /api/codes - список валют
 /api/getgif?code= - получить гиф для валюты из параметра code
+
+Docker
+docker pull impsergei/impsergei:giphy_gif
+docker run -p 8080:8080 impsergei/impsergei:giphy_gif
